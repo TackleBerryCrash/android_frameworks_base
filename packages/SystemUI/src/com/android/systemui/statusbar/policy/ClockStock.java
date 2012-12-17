@@ -37,16 +37,18 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.internal.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+
+import com.android.internal.R;
+
 /**
-* This widget display an analogic clock with two hands for hours and
-* minutes.
-*/
+ * This widget display an analogic clock with two hands for hours and
+ * minutes.
+ */
+
 public class ClockStock extends TextView {
     private boolean mAttached;
     private Calendar mCalendar;
@@ -57,7 +59,8 @@ public class ClockStock extends TextView {
     private static final int AM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
 
-    private int mAmPmStyle = AM_PM_STYLE_GONE;
+
+    private static final int AM_PM_STYLE = AM_PM_STYLE_GONE;
 
     public ClockStock(Context context) {
         this(context, null);
@@ -148,7 +151,8 @@ public class ClockStock extends TextView {
              * add dummy characters around it to let us find it again after
              * formatting and change its size.
              */
-            if (mAmPmStyle != AM_PM_STYLE_NORMAL) {
+
+            if (AM_PM_STYLE != AM_PM_STYLE_NORMAL) {
                 int a = -1;
                 boolean quoted = false;
                 for (int i = 0; i < format.length(); i++) {
@@ -173,6 +177,7 @@ public class ClockStock extends TextView {
                         + "a" + MAGIC2 + format.substring(b + 1);
                 }
             }
+
             mClockFormat = sdf = new SimpleDateFormat(format);
             mClockFormatString = format;
         } else {
@@ -180,15 +185,18 @@ public class ClockStock extends TextView {
         }
         String result = sdf.format(mCalendar.getTime());
 
-        if (mAmPmStyle != AM_PM_STYLE_NORMAL) {
+
+        if (AM_PM_STYLE != AM_PM_STYLE_NORMAL) {
             int magic1 = result.indexOf(MAGIC1);
             int magic2 = result.indexOf(MAGIC2);
             if (magic1 >= 0 && magic2 > magic1) {
                 SpannableStringBuilder formatted = new SpannableStringBuilder(result);
-                if (mAmPmStyle == AM_PM_STYLE_GONE) {
+
+                if (AM_PM_STYLE == AM_PM_STYLE_GONE) {
                     formatted.delete(magic1, magic2+1);
                 } else {
-                    if (mAmPmStyle == AM_PM_STYLE_SMALL) {
+                    if (AM_PM_STYLE == AM_PM_STYLE_SMALL) {
+
                         CharacterStyle style = new RelativeSizeSpan(0.7f);
                         formatted.setSpan(style, magic1, magic2,
                                           Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -199,7 +207,6 @@ public class ClockStock extends TextView {
                 return formatted;
             }
         }
-
         return result;
 
     }
