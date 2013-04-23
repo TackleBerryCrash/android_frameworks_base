@@ -1317,7 +1317,8 @@ public class PhoneStatusBar extends BaseStatusBar {
         if (mStatusBarView == null) return;
 	ContentResolver resolver = mContext.getContentResolver();
         View clock = mStatusBarView.findViewById(R.id.clock);
-        View cclock = mStatusBarView.findViewById(R.id.center_clock);
+        //View cclock = mStatusBarView.findViewById(R.id.center_clock);
+	View cclock = mStatusBarView.findViewById(R.id.center_clock_layout);
 
         mShowClock = (Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1);

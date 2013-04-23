@@ -137,6 +137,16 @@ public class Clock extends TextView implements OnClickListener, OnLongClickListe
 
     public Clock(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+	//to fix clock click - long click - TackleBerryCrash - Start
+	//mHandler = new Handler();
+        //SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        //settingsObserver.observe();
+        //if(isClickable()){
+        //    setOnClickListener(this);
+        //    setOnLongClickListener(this);
+        //}
+        //updateSettings();
+	//to fix clock click - long click - TackleBerryCrash - End
     }
 
     @Override
