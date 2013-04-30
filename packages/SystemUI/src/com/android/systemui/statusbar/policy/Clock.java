@@ -47,6 +47,7 @@ import java.util.TimeZone;
 public class Clock extends TextView {
 
     private Locale mLocale;
+
     protected boolean mAttached;
     protected Calendar mCalendar;
     protected String mClockFormatString;
@@ -115,6 +116,7 @@ public class Clock extends TextView {
             updateSettings();
         }
 
+
         @Override
         public void onChange(boolean selfChange) {
             updateSettings();
@@ -131,6 +133,7 @@ public class Clock extends TextView {
 
     public Clock(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
     }
 
     @Override
