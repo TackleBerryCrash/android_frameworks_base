@@ -119,7 +119,7 @@ public class Clock extends TextView {
 
         @Override
         public void onChange(boolean selfChange) {
-            updateSettings();
+        updateSettings();
         }
     }
 
@@ -133,7 +133,6 @@ public class Clock extends TextView {
 
     public Clock(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
     }
 
     @Override
