@@ -73,8 +73,7 @@ public class ClockStock extends TextView implements OnClickListener, OnLongClick
 
     private static final int AM_PM_STYLE = AM_PM_STYLE_GONE;
 
-    private SettingsObserver mObserver; 
-
+    
     public ClockStock(Context context) {
         this(context, null);
     }
@@ -85,18 +84,11 @@ public class ClockStock extends TextView implements OnClickListener, OnLongClick
 
     public ClockStock(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-	mHandler = new Handler();
-        mObserver = new SettingsObserver(mHandler);
         if (isClickable()) {
             setOnClickListener(this);
             setOnLongClickListener(this);
-        }
-        updateSettings();    
+        } 
     }
-
-    void unobserve() {
-            mContext.getContentResolver().unregisterContentObserver(this);
-        }
 
     @Override
     protected void onAttachedToWindow() {
@@ -112,7 +104,6 @@ public class ClockStock extends TextView implements OnClickListener, OnLongClick
             filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
 
             getContext().registerReceiver(mIntentReceiver, filter, null, getHandler());
-            mObserver.observe();
         }
 
         // NOTE: It's safe to do these after registering the receiver since the receiver always runs
@@ -130,7 +121,6 @@ public class ClockStock extends TextView implements OnClickListener, OnLongClick
         super.onDetachedFromWindow();
         if (mAttached) {
             getContext().unregisterReceiver(mIntentReceiver);
-            mObserver.unobserve(); 
             mAttached = false;
         }
     }
