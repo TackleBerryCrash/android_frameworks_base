@@ -673,6 +673,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.NAVIGATION_BAR_HEIGHT), false, this);
 
+
             updateSettings();
         }
 
@@ -1336,6 +1337,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             boolean keyRebindingEnabled = Settings.System.getInt(resolver,
                     Settings.System.HARDWARE_KEY_REBINDING, 0) == 1;
 
+
             if (!keyRebindingEnabled) {
                 if (mHasHomeKey) {
                     if (mHasAppSwitchKey) {
@@ -1449,6 +1451,28 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mHasSoftInput = hasSoftInput;
                 updateRotation = true;
             }
+
+            // Update navigation bar dimensions
+            if (!expandedDesktopHidesNavigationBar()) {
+		int mNavigationBarHeight = Settings.System.getInt(resolver,
+                        Settings.System.NAVIGATION_BAR_HEIGHT, 48);
+
+                // Height of the navigation bar when presented horizontally at bottom
+                mNavigationBarHeightForRotation[mPortraitRotation] =
+                mNavigationBarHeightForRotation[mUpsideDownRotation] =
+                        mNavigationBarHeight * DisplayMetrics.DENSITY_DEVICE / DisplayMetrics.DENSITY_DEFAULT;
+                mNavigationBarHeightForRotation[mLandscapeRotation] =
+                mNavigationBarHeightForRotation[mSeascapeRotation] =
+                        mNavigationBarHeight * DisplayMetrics.DENSITY_DEVICE / DisplayMetrics.DENSITY_DEFAULT;
+
+                // Width of the navigation bar when presented vertically along one side
+                mNavigationBarWidthForRotation[mPortraitRotation] =
+                mNavigationBarWidthForRotation[mUpsideDownRotation] =
+                mNavigationBarWidthForRotation[mLandscapeRotation] =
+                mNavigationBarWidthForRotation[mSeascapeRotation] =
+                        (mNavigationBarHeight - 6) * DisplayMetrics.DENSITY_DEVICE / DisplayMetrics.DENSITY_DEFAULT;
+
+		}
         }
 
         if (updateRotation) {
