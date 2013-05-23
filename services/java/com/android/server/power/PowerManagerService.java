@@ -1260,6 +1260,12 @@ public final class PowerManagerService extends IPowerManager.Stub
             return false;
         }
 
+	// If WAKEUP_WHEN_PLUGGED_UNPLUGGED set to true, then don't wake.
+        if (!Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, true)) {
+            return false;
+        } 
+
         // Otherwise wake up!
         return true;
     }
