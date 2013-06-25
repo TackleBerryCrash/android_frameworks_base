@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -47,7 +49,8 @@ import java.util.TimeZone;
 public class Clock extends TextView {
 
     private Locale mLocale;
-
+    private SettingsObserver mObserver;
+    private boolean mHidden;
     protected boolean mAttached;
     protected Calendar mCalendar;
     protected String mClockFormatString;
@@ -133,6 +136,11 @@ public class Clock extends TextView {
 
     public Clock(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setHidden(boolean hidden) {
+        mHidden = hidden;
+        updateVisibility();
     }
 
     @Override
