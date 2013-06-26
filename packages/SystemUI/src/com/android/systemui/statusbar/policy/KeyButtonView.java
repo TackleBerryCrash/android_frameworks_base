@@ -63,7 +63,7 @@ public class KeyButtonView extends ImageView {
     int mDurationSpeedOn = 500;
     int mDurationSpeedOff = 50; 
     float mGlowAlpha = 0f, mGlowScale = 1f, mDrawingAlpha = 1f;
-    boolean mSupportsLongpress = true;
+    boolean mSupportsLongPress = true;
     protected boolean mHandlingLongpress = false; 
     RectF mRect = new RectF(0f,0f,0f,0f);
     AnimatorSet mPressedAnim;
@@ -113,7 +113,7 @@ public class KeyButtonView extends ImageView {
     }
 
     public void setSupportsLongPress(boolean supports) {
-        mSupportsLongpress = supports;
+        mSupportsLongPress = supports;
     }
 
     public void setHandlingLongpress(boolean handling) {

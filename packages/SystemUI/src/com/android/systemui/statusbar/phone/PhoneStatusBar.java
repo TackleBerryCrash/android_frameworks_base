@@ -245,6 +245,9 @@ public class PhoneStatusBar extends BaseStatusBar {
     private CircleDockBattery mCircleDockBattery;
     private Clock mClock;
 
+    // clock
+    private boolean mShowClock;
+
     private boolean mShowCarrierInPanel = false;
 
     // drag bar

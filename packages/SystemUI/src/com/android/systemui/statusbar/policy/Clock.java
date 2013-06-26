@@ -143,6 +143,12 @@ public class Clock extends TextView {
         updateVisibility();
     }
 
+    private void updateVisibility() {
+        boolean showClock = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCK, 1, UserHandle.USER_CURRENT) == 1;
+        setVisibility(showClock && !mHidden ? View.VISIBLE : View.GONE);
+     } 
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -325,7 +331,7 @@ public class Clock extends TextView {
         return formatted;
     }
 
-    protected void updateSettings() {
+    public void updateSettings() {
 
         ContentResolver resolver = mContext.getContentResolver();
         int defaultColor = getResources().getColor(

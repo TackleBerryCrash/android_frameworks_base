@@ -175,12 +175,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         setMenuVisibility(false, true);
    }
 
-    protected void updateSettings() {
-        ContentResolver resolver = mContext.getContentResolver();
-        updateColor();
-        makeBar();
-    }
- 
     private void updateColor() {
         int color = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.NAVIGATION_BAR_TINT,
@@ -293,6 +287,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         removeButtonListeners();
         updateButtonListeners();
         setDisabledFlags(mDisabledFlags, true /* force */);
+        updateColor();
+        makeBar();
     }
 
     public void notifyScreenOn(boolean screenOn) {
