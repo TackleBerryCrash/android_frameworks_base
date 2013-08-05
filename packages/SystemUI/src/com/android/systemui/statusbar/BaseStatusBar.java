@@ -991,6 +991,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         }
         if (!isNotificationPanelFullyVisible()) {
             return;
+
         }
 
         boolean collapseDueToEmpty =
